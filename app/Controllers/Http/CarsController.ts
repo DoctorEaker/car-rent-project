@@ -36,17 +36,28 @@ export default class CarsController {
     car.status = status[Math.floor(Math.random() * status.length)]
 
     await car.save()
-    return view.render('cars')
-
+    return car
   }
+
 
   public async store({}: HttpContextContract) {}
 
-  public async show({}: HttpContextContract) {}
+
+
+  public async show({params}: HttpContextContract) {
+    let cars;
+    if(params.id=="all")cars = await Car.all()
+    else cars = await Car.findBy('plate', params.id);
+    return cars
+  }
+
+
 
   public async edit({}: HttpContextContract) {}
 
-  public async update({}: HttpContextContract) {}
+  public async update({}: HttpContextContract) {
+
+  }
 
   public async destroy({}: HttpContextContract) {}
 }
