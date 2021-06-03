@@ -7,7 +7,7 @@ export default class CarsController {
     return view.render('cars', {cars: cars})
   }
 
-  public async create({view}: HttpContextContract) {
+  public async create({}: HttpContextContract) {
     const car = new Car()
     var plate = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -53,10 +53,17 @@ export default class CarsController {
 
 
 
-  public async edit({}: HttpContextContract) {}
-
-  public async update({}: HttpContextContract) {
-
+  public async edit({response, params}: HttpContextContract) {
+    const car =  await Car.findByOrFail('plate', params.id);
+    car.status = "Unavailable";
+    await car.save();
+    response.redirect().back()
+  }
+  public async update({response, params}: HttpContextContract) {
+    const car =  await Car.findByOrFail('plate', params.id);
+    car.status = "Unavailable";
+    await car.save();
+    response.redirect().back()
   }
 
   public async destroy({}: HttpContextContract) {}

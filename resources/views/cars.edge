@@ -11,7 +11,7 @@
 
   <main>
     <div>
-      <h1 class="title">Welcome</h1>
+      <h1 class="title">Welcome to Webserver A</h1>
       <p class="subtitle">
         Check for cars
       </p>
@@ -27,7 +27,11 @@
              {{ car.model }} 
              {{ car.price }} 
              {{ car.ppd }} 
-             {{ car.status }} </li>
+             {{ car.status }}
+             <form method="GET" action="{{ route('cars.update', {id: car.plate}) }}/edit">
+              <button style="display:inline; border: none; color:cornflowerblue;cursor:pointer;" type="submit">Rent</button>
+            </form>
+            </li>
 
         </ul>
         @end
